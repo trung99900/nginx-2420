@@ -1,39 +1,54 @@
 # nginx-2420
-Step 1: Connect to Your Arch Linux Server
+1. Connect to Your Arch Linux Server
+
 Connect to your Arch Linux server via SSH using your preferred terminal emulator.# nginx-2420
-'''
+
+```
     ssh username@your_server_ip
-'''
-Step 2: Install Necessary Software
+```
+2. Install Necessary Software
+
 Update the package repository and install Vim and Nginx.
-'''
+
+```
     sudo pacman -Sy vim nginx
-'''
-Step 3: Create Project Directory
+```
+
+3. Create Project Directory
+
 Create a new directory /web/html/nginx-2420 to serve as your project root where website documents will be stored.
-'''
+
+```
     sudo mkdir -p /web/html/nginx-2420
-'''
-Step 4: Configure Nginx
+```
+
+4. Configure Nginx
+
 Create a new server block configuration file for your project. Open the file using Vim or any text editor.
-'''
+
+```
     sudo vim /etc/nginx/sites-available/nginx-2420
-'''
+```
+
 If the directory structure /etc/nginx/sites-available is not set up by default in your Nginx installation, you can create it manually. Here's how:
 
 Create the Directory: Use the mkdir command to create the sites-available directory inside the /etc/nginx directory.
-'''
+
+```
     sudo mkdir -p /etc/nginx/sites-available
-'''
+```
+
 This command creates the sites-available directory, along with any parent directories if they don't already exist.
 
 Verify the Directory: Confirm that the directory was created successfully.
-'''
+
+```
     ls /etc/nginx
-'''
+```
+
 Add the following configuration to the file:
 
-'''
+```
     server {
     listen 80;
     listen [::]:80;
@@ -43,41 +58,61 @@ Add the following configuration to the file:
         index index.php index.html index.htm;
     }
 }
-'''
+```
 Replace domainname1.tld with your domain name.
-Step 5: Enable the Server Block
+
+5. Enable the Server Block
+
 Create a symbolic link from the sites-available directory to the sites-enabled directory to enable the server block.
-'''
+
+```
     sudo ln -s /etc/nginx/sites-available/nginx-2420 /etc/nginx/sites-enabled/
-'''
+```
+
 If the /etc/nginx/sites-enabled directory doesn't exist, you'll need to create it before creating the symbolic link. Here's how you can do it:
-'''
+
+```
     sudo mkdir -p /etc/nginx/sites-enabled
-'''
+```
+
 This command will create the sites-enabled directory within the /etc/nginx directory. After creating the directory, you can create the symbolic link as follows:
+
 sudo ln -s /etc/nginx/sites-available/nginx-2420 /etc/nginx/sites-enabled/
+
 Now the symbolic link will be created successfully, allowing Nginx to include the configuration file for the nginx-2420 server block.
-Step 6: Test Nginx Configuration
+
+6. Test Nginx Configuration
+
 Check the Nginx configuration for syntax errors.
-'''
+
+```
     sudo nginx -t
-'''
+```
+
 If there are no errors, reload Nginx to apply the changes.
-'''
+
+```
     sudo systemctl reload nginx
-'''
-Step 7: Verify Nginx Service
+```
+
+7. Verify Nginx Service
+
 Ensure that Nginx is running properly.
-'''
+
+```
     sudo systemctl status nginx
-'''
-Step 8: Create Demo Document
+```
+8. Create Demo Document
+
 Create a simple HTML demo document and place it in the project directory.
-'''
+
+```
     sudo vim /web/html/nginx-2420/index.html
-'''
+```
+
 Add some sample content to the HTML file, for example:
-'''
+
+```
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -106,14 +141,20 @@ Add some sample content to the HTML file, for example:
         <h1>All your base are belong to us</h1>
     </body>
     </html>
-'''
-Step 9: Access the Demo Page
+```
+
+9. Access the Demo Page
+
 Open a web browser and navigate to your server's domain name or IP address. You should see the demo page served by Nginx.
+
 You are going to face the issue like this:
+
 Apr 02 16:50:46 archy nginx[1059117]: 2024/04/02 16:50:46 [warn] 1059117#1059117: could not build optimal types_hash, you should increase either types_hash>
+
 --> For this issue, you have to change the configuration file from
 /etc/nginx/nginx.conf. You have to replace the original file from https://wiki.archlinux.org/title/Nginx to /etc/nginx/nginx.conf in your server:
-'''
+
+```
     user http;
 worker_processes auto;
 worker_cpu_affinity auto;
@@ -145,7 +186,8 @@ http {
     include /etc/nginx/conf.d/*.conf;
     include /etc/nginx/sites-enabled/*;
 }
-'''
+```
 
 Conclusion
+
 You have successfully set up a fresh Arch Linux server on DigitalOcean to serve a demo document using Nginx. This tutorial covered the installation of necessary software, configuration of Nginx with a separate server block, and utilization of systemd components for managing services.
