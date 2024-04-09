@@ -30,7 +30,7 @@ sftp linux
 - Upload the hello-server file:
 
 ```bash
-put C:\Users\alext\Downloads\2420_notes_w24\attachments\hello-server
+put C:\Users\trung\Downloads\2420_notes_w24\attachments\hello-server
 
 ```
 - Exit SFTP:
