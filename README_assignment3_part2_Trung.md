@@ -1,4 +1,4 @@
-# nginx-2420 - Part2
+# nginx-2420 - Part2: adds a firewall using UFW and a reverse proxy server to the backend
 
 ## Service Prerequisite - ufw Installation
 
