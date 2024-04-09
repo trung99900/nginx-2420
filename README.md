@@ -191,3 +191,5 @@ http {
 Conclusion
 
 You have successfully set up a fresh Arch Linux server on DigitalOcean to serve a demo document using Nginx. This tutorial covered the installation of necessary software, configuration of Nginx with a separate server block, and utilization of systemd components for managing services.
+
+
